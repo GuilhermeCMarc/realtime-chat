@@ -11,7 +11,8 @@
     "paths": {
       "@utils/*": ["utils/*"],
       "@routes/*": ["routes/*"],
-      "@framework/*": ["framework/*"]
+      "@framework/*": ["framework/*"],
+      "@schemas/*": ["schemas/*"]
     }
   },
   "ts-node": {

@@ -1,12 +1,13 @@
-import { BadRequestError } from "../utils/errors";
-import RouteHandler from "../framework/routeHandler";
+import RouteHandler from '@framework/routeHandler';
+import { BadRequestError } from '@utils/errors';
 
 const handler: RouteHandler = {
   config: {
-    method: "get",
+    method: 'get',
+    isPublic: true
   },
   handle: async (req, res) => {
-    throw new BadRequestError("Testing error handling");
+    throw new BadRequestError('Testing error handling');
   },
 };
 

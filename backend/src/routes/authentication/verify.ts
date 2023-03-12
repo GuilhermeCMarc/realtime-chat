@@ -3,11 +3,10 @@ import RouteHandler from '@framework/routeHandler';
 const handler: RouteHandler = {
   config: {
     method: 'get',
-    isPublic: true
   },
-  async handle (req, res) {
-    res.send('Hello World');
-  },
+  handle: (req, res) => {
+    return res.status(200).send({ message: 'ok' });
+  }
 };
 
 export default handler;

@@ -1,12 +1,12 @@
-import express, { Request, Response } from "express";
-import dotenv from "dotenv";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import compression from "compression";
-import cors from "cors";
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express, { Request, Response } from 'express';
 
-import logger from "./utils/logger";
-import buildRoutes from "./framework/routeBuilder";
+import buildRoutes from '@framework/routeBuilder';
+import logger from '@utils/logger';
 
 dotenv.config();
 
@@ -20,8 +20,8 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send({ message: "Hello World!" });
+app.get('/', (req: Request, res: Response) => {
+  res.send({ message: 'Hello World!' });
 });
 
 buildRoutes(app);

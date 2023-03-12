@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 
-export default function walkSync(
+export default function walkSync (
   dir: string,
   callback: (filepath: string, stats: fs.Stats) => void
 ) {

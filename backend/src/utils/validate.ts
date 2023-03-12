@@ -1,17 +1,20 @@
-import { Request, Response } from "express";
-import { z } from "zod";
-import { BadRequestError } from "./errors";
+import { RouteHandleType } from '@framework/routeHandler';
+import { Request, Response } from 'express';
+import { z } from 'zod';
 
-export async function validate<TBody>(
+import { BadRequestError } from './errors';
+
+export function validate<TBody> (
   schema: z.Schema<TBody>,
-  handler: (req: Request<any, any, TBody>, res: Response) => any
-) {
+  handle: RouteHandleType<TBody>
+): RouteHandleType {
   return (req: Request, res: Response) => {
     const result = schema.safeParse(req.body);
+
     if (!result.success) {
-      throw new BadRequestError((result as any).error.message);
+      throw new BadRequestError((result as any).error);
     }
 
-    return handler(req, res);
+    return handle(req, res);
   };
 }

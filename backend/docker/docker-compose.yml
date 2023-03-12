@@ -1,20 +1,15 @@
 version: '3.8'
 services:
   database:
-    image: postgres:14.1-apine
+    image: postgres
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
-    volumes:
-      - db:/var/lib/postgresql/data
   maildev:
     image: maildev/maildev
     ports:
       - '1080:1080'
       - '1025:1025'
-volumes:
-  database:
-    driver: local
