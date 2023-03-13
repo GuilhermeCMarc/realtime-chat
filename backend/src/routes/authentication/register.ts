@@ -23,12 +23,16 @@ const handler: RouteHandler = {
       data: {
         name,
         email,
-        password: await hashAsync(password)
-      }
+        password: {
+          create: {
+            hash: await hashAsync(password),
+          },
+        },
+      },
     });
 
     return res.status(201).send();
-  })
+  }),
 };
 
 export default handler;

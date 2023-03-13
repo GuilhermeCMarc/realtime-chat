@@ -14,13 +14,15 @@ const handler: RouteHandler = {
   handle: validate(userLoginSchema, async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await p.user.findUnique({ where: { email } });
+    const user = await p.user.findUnique({ where: { email }, include: {
+      password: true
+    } });
     
     if (!user) {
       throw new ForbiddenError('Invalid credentials');
     }
 
-    const isValid = await compareAsync(password, user.password);
+    const isValid = await compareAsync(password, user.password?.hash);
     
     if (!isValid) {
       throw new ForbiddenError('Invalid credentials');
