@@ -14,10 +14,11 @@ module.exports = {
       ...radixColors.indigoDark,
       ...radixColors.amberDark,
       ...radixColors.redDark,
+      ...radixColors.greenDark,
     },
 
     fontFamily: {
-      sans: ["Sora", "sans-serif"],
+      sans: ["Poppins", "sans-serif"],
     },
   },
   plugins: [],
