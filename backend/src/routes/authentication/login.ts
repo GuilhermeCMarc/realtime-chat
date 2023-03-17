@@ -9,29 +9,34 @@ import { validate } from '@utils/validate';
 const handler: RouteHandler = {
   config: {
     method: 'post',
-    isPublic: true
+    isPublic: true,
   },
   handle: validate(userLoginSchema, async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await p.user.findUnique({ where: { email }, include: {
-      password: true
-    } });
-    
+    const user = await p.user.findUnique({
+      where: { email },
+      include: {
+        password: true,
+      },
+    });
+
     if (!user) {
       throw new ForbiddenError('Invalid credentials');
     }
 
     const isValid = await compareAsync(password, user.password?.hash);
-    
+
     if (!isValid) {
       throw new ForbiddenError('Invalid credentials');
     }
-    
+
     const token = generateAccessToken(user.email);
 
-    return res.status(200).send({ token });
-  })
+    delete user.password;
+
+    return res.status(200).send({ token, user });
+  }),
 };
 
 export default handler;

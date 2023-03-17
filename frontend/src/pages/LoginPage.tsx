@@ -1,15 +1,16 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 
-import Center from "../components/Center";
-import Button from "../components/Button";
-import Card from "../components/Card";
-import CardRow from "../components/CardRow";
-import FormInput from "../components/FormInput";
-import { Link } from "react-router-dom";
+import Center from "../components/presentation/Center";
+import Button from "../components/form/Button";
+import Card from "../components/presentation/Card";
+import CardRow from "../components/presentation/CardRow";
+import FormInput from "../components/form/FormInput";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userLoginSchema } from "../schemas/userSchemas";
-import { login } from "../api/authentication";
+import { useAuth } from "../contexts/AuthContext";
+import { useToast } from "../contexts/ToastContext";
 
 export default function LoginPage() {
   const {
@@ -20,6 +21,10 @@ export default function LoginPage() {
     resolver: zodResolver(userLoginSchema),
   });
 
+  const { isLoading, login, user } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
   async function onSubmit(data: any) {
     const result = userLoginSchema.safeParse(data);
 
@@ -28,8 +33,9 @@ export default function LoginPage() {
       return;
     }
 
-    const response = await login(result.data);
-    console.log({ response });
+    await login(result.data);
+
+    navigate("/");
   }
 
   return (
@@ -56,6 +62,7 @@ export default function LoginPage() {
               placeholder="Type your password"
               type="password"
               required
+              isPassword
               error={errors.password}
               {...register("password")}
             />

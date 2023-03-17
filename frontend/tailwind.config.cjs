@@ -10,11 +10,11 @@ module.exports = {
       white: twColors.white,
       black: twColors.black,
 
-      ...radixColors.slateDark,
-      ...radixColors.indigoDark,
-      ...radixColors.amberDark,
-      ...radixColors.redDark,
-      ...radixColors.greenDark,
+      ...radixColors.slate,
+      ...radixColors.indigo,
+      ...radixColors.amber,
+      ...radixColors.red,
+      ...radixColors.green,
     },
 
     fontFamily: {

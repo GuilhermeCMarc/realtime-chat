@@ -46,7 +46,7 @@ model Conversation {
   users User[]
 
   messages Message[]
-  Group    Group[]
+  group    Group[]
 }
 
 model Message {

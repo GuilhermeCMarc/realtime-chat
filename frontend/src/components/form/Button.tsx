@@ -16,7 +16,7 @@ const button = cva(
         true: "w-full",
       },
       icon: {
-        true: "w-10 h-11 px-0 py-0",
+        true: "w-10 h-11 px-0 py-0 grid",
       },
     },
     defaultVariants: {

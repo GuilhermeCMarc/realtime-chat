@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import Button from "../components/Button";
-import Card from "../components/Card";
-import CardRow from "../components/CardRow";
-import Center from "../components/Center";
-import FormInput from "../components/FormInput";
+import Button from "../components/form/Button";
+import Card from "../components/presentation/Card";
+import CardRow from "../components/presentation/CardRow";
+import Center from "../components/presentation/Center";
+import FormInput from "../components/form/FormInput";
 import { registerUserSchema } from "../schemas/userSchemas";
 import { register as registerUser } from "../api/authentication";
 
@@ -19,6 +19,8 @@ export default function RegisterPage() {
     resolver: zodResolver(registerUserSchema),
   });
 
+  const navigate = useNavigate();
+
   async function onSubmit(data: any) {
     const result = registerUserSchema.safeParse(data);
 
@@ -27,8 +29,12 @@ export default function RegisterPage() {
       return;
     }
 
-    const response = await registerUser(result.data);
-    console.log({ response });
+    await registerUser(result.data);
+
+    // todo: Show toast
+    // todo: Handle errors
+
+    navigate("/login");
   }
 
   return (
